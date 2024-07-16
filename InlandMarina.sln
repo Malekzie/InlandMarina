@@ -5,6 +5,10 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marina", "Marina\Marina.csproj", "{D3365085-F4B1-4A97-9071-C1B51A9939EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marina.DataAccess", "Marina.DataAccess\Marina.DataAccess.csproj", "{0B970875-8812-4C9E-855A-73F38CE9FB16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marina.Models", "Marina.Models\Marina.Models.csproj", "{2A91EE6D-6D69-4576-B1FD-FD197BE62D19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D3365085-F4B1-4A97-9071-C1B51A9939EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3365085-F4B1-4A97-9071-C1B51A9939EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3365085-F4B1-4A97-9071-C1B51A9939EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B970875-8812-4C9E-855A-73F38CE9FB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B970875-8812-4C9E-855A-73F38CE9FB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B970875-8812-4C9E-855A-73F38CE9FB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B970875-8812-4C9E-855A-73F38CE9FB16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A91EE6D-6D69-4576-B1FD-FD197BE62D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A91EE6D-6D69-4576-B1FD-FD197BE62D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A91EE6D-6D69-4576-B1FD-FD197BE62D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A91EE6D-6D69-4576-B1FD-FD197BE62D19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
