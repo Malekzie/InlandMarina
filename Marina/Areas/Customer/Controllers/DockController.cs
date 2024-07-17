@@ -1,11 +1,15 @@
 ﻿using Marina.DataAccess.Repositories.IRepository;
 using Marina.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Marina.Controllers
+namespace Marina.Areas.Customer.Controllers
 {
+    [Area("Customer")]
+    [AllowAnonymous]
+    [Authorize]
     public class DockController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

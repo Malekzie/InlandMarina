@@ -2,8 +2,9 @@ using Marina.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Marina.Controllers
+namespace Marina.Areas.Anon.Controllers
 {
+    [Area("Anon")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
