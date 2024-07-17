@@ -16,10 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Marina.Models\Marina.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\IRepository\" />
+    <ProjectReference Include="..\Marina.Utils\Marina.Utils.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ namespace Marina.DataAccess.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Dock> Docks { get; set; }
+        public DbSet<Dock> Dock { get; set; }
         public DbSet<Slip> Slips { get; set; }
         public DbSet<Lease> Leases { get; set; }
 

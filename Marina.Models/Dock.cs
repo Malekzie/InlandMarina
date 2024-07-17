@@ -20,6 +20,6 @@ namespace Marina.Models
         public bool ElectricalService { get; set; }
 
         // Navigation Property
-        public virtual ICollection<Slip> Slips { get; set; }
+        public virtual ICollection<Slip> Slips { get; set; } = new List<Slip>();
     }
 }

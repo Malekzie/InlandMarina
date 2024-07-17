@@ -1,0 +1,45 @@
+﻿@model Marina.Models.DockViewModel
+
+<h1 class="mb-5">Docks and Slips</h1>
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <select class="form-select" name="dockId" id="dockId" onchange="loadDocksAndSlips()">
+            @foreach (var dock in Model.Docks)
+            {
+                <option value="@dock.ID" selected=@(dock.ID == Model.SelectedDock.ID ? "selected" : null)>@dock.Name</option>
+            }
+        </select>
+    </div>
+</form>
+
+<div id="docksAndSlipsContainer">
+    @await Html.PartialAsync("_DocksAndSlips", Model)
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadDocksAndSlips() {
+        var dockId = $('#dockId').val();
+        $.ajax({
+            url: '@Url.Action("LoadDocksAndSlips", "Dock")',
+            type: 'GET',
+            data: { dockId: dockId },
+            success: function (result) {
+                $('#docksAndSlipsContainer').html(result);
+            }
+        });
+    }
+
+    function loadPage(pageIndex) {
+        var dockId = $('#dockId').val();
+        $.ajax({
+            url: '@Url.Action("LoadDocksAndSlips", "Dock")',
+            type: 'GET',
+            data: { dockId: dockId, pageIndex: pageIndex },
+            success: function (result) {
+                $('#docksAndSlipsContainer').html(result);
+            }
+        });
+    }
+</script>
