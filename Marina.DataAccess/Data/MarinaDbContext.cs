@@ -1,15 +1,16 @@
 ﻿using Marina.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Marina.DataAccess.Data
 {
-    public class MarinaDbContext : DbContext
+    public class MarinaDbContext : IdentityDbContext
     {
         public MarinaDbContext(DbContextOptions<MarinaDbContext> options) : base(options)
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Customer> Customer { get; set; }
         public DbSet<Dock> Dock { get; set; }
         public DbSet<Slip> Slips { get; set; }
         public DbSet<Lease> Leases { get; set; }

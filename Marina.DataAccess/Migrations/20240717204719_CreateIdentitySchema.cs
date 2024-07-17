@@ -11,6 +11,40 @@ namespace Marina.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Leases_Customers_CustomerId",
+                table: "Leases");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Customers",
+                table: "Customers");
+
+            migrationBuilder.DropColumn(
+                name: "Password",
+                table: "Customers");
+
+            migrationBuilder.DropColumn(
+                name: "Username",
+                table: "Customers");
+
+            migrationBuilder.RenameTable(
+                name: "Customers",
+                newName: "Customer");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Phone",
+                table: "Customer",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(15)",
+                oldMaxLength: 15);
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Customer",
+                table: "Customer",
+                column: "ID");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -194,11 +228,23 @@ namespace Marina.DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Leases_Customer_CustomerId",
+                table: "Leases",
+                column: "CustomerId",
+                principalTable: "Customer",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Leases_Customer_CustomerId",
+                table: "Leases");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -219,6 +265,73 @@ namespace Marina.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Customer",
+                table: "Customer");
+
+            migrationBuilder.RenameTable(
+                name: "Customer",
+                newName: "Customers");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Phone",
+                table: "Customers",
+                type: "nvarchar(15)",
+                maxLength: 15,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Password",
+                table: "Customers",
+                type: "nvarchar(30)",
+                maxLength: 30,
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Username",
+                table: "Customers",
+                type: "nvarchar(30)",
+                maxLength: 30,
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Customers",
+                table: "Customers",
+                column: "ID");
+
+            migrationBuilder.UpdateData(
+                table: "Customers",
+                keyColumn: "ID",
+                keyValue: 1,
+                columns: new[] { "Password", "Username" },
+                values: new object[] { "Imasneekyboi", "JoeMama" });
+
+            migrationBuilder.UpdateData(
+                table: "Customers",
+                keyColumn: "ID",
+                keyValue: 2,
+                columns: new[] { "Password", "Username" },
+                values: new object[] { "Itsyogurl", "SaraNookie" });
+
+            migrationBuilder.UpdateData(
+                table: "Customers",
+                keyColumn: "ID",
+                keyValue: 3,
+                columns: new[] { "Password", "Username" },
+                values: new object[] { "ChickenRiceNoodles", "NothingKenGoWong" });
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Leases_Customers_CustomerId",
+                table: "Leases",
+                column: "CustomerId",
+                principalTable: "Customers",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Marina.DataAccess.Migrations
 {
     [DbContext(typeof(MarinaDbContext))]
-    [Migration("20240717195722_CreateIdentitySchema")]
+    [Migration("20240717204719_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         /// <inheritdoc />
@@ -45,24 +45,13 @@ namespace Marina.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
 
                     b.HasData(
                         new
@@ -71,9 +60,7 @@ namespace Marina.DataAccess.Migrations
                             City = "Phoenix",
                             FirstName = "John",
                             LastName = "Doe",
-                            Password = "Imasneekyboi",
-                            Phone = "265-555-1212",
-                            Username = "JoeMama"
+                            Phone = "265-555-1212"
                         },
                         new
                         {
@@ -81,9 +68,7 @@ namespace Marina.DataAccess.Migrations
                             City = "Calgary",
                             FirstName = "Sara",
                             LastName = "Williams",
-                            Password = "Itsyogurl",
-                            Phone = "403-555-9585",
-                            Username = "SaraNookie"
+                            Phone = "403-555-9585"
                         },
                         new
                         {
@@ -91,9 +76,7 @@ namespace Marina.DataAccess.Migrations
                             City = "Kansas City",
                             FirstName = "Ken",
                             LastName = "Wong",
-                            Password = "ChickenRiceNoodles",
-                            Phone = "802-555-3214",
-                            Username = "NothingKenGoWong"
+                            Phone = "802-555-3214"
                         });
                 });
 
