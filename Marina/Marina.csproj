@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Marina.DataAccess\Marina.DataAccess.csproj" />
     <ProjectReference Include="..\Marina.Models\Marina.Models.csproj" />
+    <ProjectReference Include="..\Marina.Utils\Marina.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
