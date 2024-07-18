@@ -1,23 +1,32 @@
 ﻿@model List<Lease>
 
-<h2>My Slips</h2>
+@{
+    ViewData["Title"] = "My Slips";
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Slip ID</th>
-            <th>Width</th>
-            <th>Length</th>
-        </tr>
-    </thead>
-    <tbody>
+<h2 class="text-center my-4">My Slips</h2>
+
+<div class="container">
+    <div class="row">
         @foreach (var lease in Model)
         {
-            <tr>
-                <td>@lease.Slip.ID</td>
-                <td>@lease.Slip.Width</td>
-                <td>@lease.Slip.Length</td>
-            </tr>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h5 class="my-2">Slip @lease.Slip.ID</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Width:</strong> @lease.Slip.Width ft</p>
+                        <p><strong>Length:</strong> @lease.Slip.Length ft</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <form asp-action="RemoveConfirm" asp-controller="Lease" asp-area="Customer"  class="d-inline">
+                            <input type="hidden" name="id" value="@lease.ID" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>

@@ -43,7 +43,7 @@ namespace Marina.Areas.Customer.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account", new { area = "Identity"});
             }
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -78,7 +78,7 @@ namespace Marina.Areas.Customer.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
             }
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -89,5 +89,50 @@ namespace Marina.Areas.Customer.Controllers
 
             return View(leases);
         }
+
+        // GET: Lease/Remove
+        public IActionResult Remove(int id)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
+
+            var lease = _context.Leases
+                .Include(l => l.Slip)
+                .FirstOrDefault(l => l.ID == id);
+
+            if (lease == null || lease.CustomerID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return NotFound();
+            }
+
+            return View(lease);
+        }
+
+        // POST: Lease/Remove
+        [HttpPost, ActionName("RemoveConfirm")]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveConfirmed(int id)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
+
+            var lease = _context.Leases
+                .FirstOrDefault(l => l.ID == id);
+
+            if (lease == null || lease.CustomerID != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return NotFound();
+            }
+
+            _context.Leases.Remove(lease);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

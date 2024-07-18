@@ -16,12 +16,7 @@ builder.Services.AddDbContext<MarinaDbContext>(options =>
 
 
 // Configure Routes
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = $"/Identity/Account/Login";
-    options.LogoutPath = $"/Identity/Account/Logout";
-    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-});
+
 
 builder.Services.AddRazorPages();
 
@@ -30,6 +25,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MarinaDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied"; 
+});
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Service for the email sender, If not added, it gives an error.
@@ -64,6 +65,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapRazorPages();
 });
 
 app.Run();
