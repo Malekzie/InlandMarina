@@ -23,7 +23,24 @@
                         @(slip.IsAvailable ? "Available" : "Reserved")
                     </div>
                 </td>
-                <td><a asp-action="Reserve" asp-area="Customer" asp-controller="Lease" asp-route-slipID="@slip.ID" class="btn btn-primary">Reserve</a></td>
+                <td>
+                    @if (slip.IsAvailable)
+                    {
+                        <a asp-action="Reserve"
+                           asp-area="Customer"
+                           asp-controller="Lease"
+                           asp-route-slipID="@slip.ID"
+                           class="btn btn-primary">
+                            Reserve
+                        </a>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-danger" disabled>
+                            Reserved
+                        </button>
+                    }
+                </td>
             </tr>
         }
     </tbody>
