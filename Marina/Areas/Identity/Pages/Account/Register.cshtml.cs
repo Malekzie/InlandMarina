@@ -3,6 +3,7 @@
 #nullable disable
 
 using Marina.Utils;
+using Marina.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -95,10 +96,10 @@ namespace Marina.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Phone { get; set; }
-            public string City { get; set; }
+            public string? FirstName { get; set; }
+            public string? LastName { get; set; }
+            public string? Phone { get; set; }
+            public string? City { get; set; }
 
         }
 
@@ -121,6 +122,7 @@ namespace Marina.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
