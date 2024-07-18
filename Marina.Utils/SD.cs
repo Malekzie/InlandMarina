@@ -10,6 +10,5 @@ namespace Marina.Utils
     {
         public const string CustomerEndUser = "Customer";
         public const string AdminEndUser = "Admin";
-        public const string AnonEndUser = "Anon";
     }
 }

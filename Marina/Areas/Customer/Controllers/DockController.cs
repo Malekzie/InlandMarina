@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 namespace Marina.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    [AllowAnonymous]
-    [Authorize]
     public class DockController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,6 +17,7 @@ namespace Marina.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> LoadDocksAndSlips(int dockId, int pageIndex = 1, int pageSize = 5)
         {
             var docks = await _unitOfWork.Dock.GetDocksWithSlips();
@@ -46,6 +45,7 @@ namespace Marina.Areas.Customer.Controllers
             return PartialView("_DocksAndSlips", viewModel);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int? dockId, int pageIndex = 1, int pageSize = 5)
         {
             var docks = await _unitOfWork.Dock.GetDocksWithSlips();

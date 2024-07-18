@@ -101,21 +101,22 @@ namespace Marina.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string FirstName { get; set; }
+            [Required]
+            public string LastName { get; set; }
+            [Required]
+            public string Phone { get; set; }
+            [Required]
+            public string City { get; set; }
+
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            // If role does not exist, create it
-            if (!_roleManager.RoleExistsAsync(SD.CustomerEndUser).GetAwaiter().GetResult())
-            {
-                _roleManager.CreateAsync(new IdentityRole(SD.CustomerEndUser)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.AdminEndUser)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.AnonEndUser)).GetAwaiter().GetResult();
-            }
-            {
-
-            }
+            await EnsureRolesExistAsync();
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -131,11 +132,14 @@ namespace Marina.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    await _userManager.AddToRoleAsync(user, SD.CustomerEndUser);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -190,6 +194,18 @@ namespace Marina.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
+        }
+
+        private async Task EnsureRolesExistAsync()
+        {
+            if (!await _roleManager.RoleExistsAsync(SD.CustomerEndUser))
+            {
+                await _roleManager.CreateAsync(new IdentityRole(SD.CustomerEndUser));
+            }
+            if (!await _roleManager.RoleExistsAsync(SD.AdminEndUser))
+            {
+                await _roleManager.CreateAsync(new IdentityRole(SD.AdminEndUser));
+            }
         }
     }
 }

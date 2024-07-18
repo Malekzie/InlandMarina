@@ -1,10 +1,11 @@
 using Marina.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Marina.Areas.Anon.Controllers
+namespace Marina.Controllers
 {
-    [Area("Anon")]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Marina.Areas.Anon.Controllers
+namespace Marina.Controllers
 {
-    [Area("Anon")]
+    [AllowAnonymous]
     public class Contact : Controller
     {
         public IActionResult Index()
