@@ -1,4 +1,5 @@
 ﻿using Marina.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,12 +20,47 @@ namespace Marina.DataAccess.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //seed data created here
-            modelBuilder.Entity<Customer>().HasData(
-                new Customer { ID = 1, FirstName = "John", LastName = "Doe", Phone = "265-555-1212", City = "Phoenix" },
-                new Customer { ID = 2, FirstName = "Sara", LastName = "Williams", Phone = "403-555-9585", City = "Calgary" },
-                new Customer { ID = 3, FirstName = "Ken", LastName = "Wong", Phone = "802-555-3214", City = "Kansas City" }
-            );
+            modelBuilder.Entity<Lease>()
+                          .HasOne(l => l.Customer)
+                          .WithMany(c => c.Leases)
+                          .HasForeignKey(l => l.CustomerID);
+
+            var hasher = new PasswordHasher<IdentityUser>();
+
+            var user1 = new IdentityUser
+            {
+                Id = "user1_id",
+                UserName = "john.doe@example.com",
+                NormalizedUserName = "JOHN.DOE@EXAMPLE.COM",
+                Email = "john.doe@example.com",
+                NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!")
+            };
+
+            var user2 = new IdentityUser
+            {
+                Id = "user2_id",
+                UserName = "sara.williams@example.com",
+                NormalizedUserName = "SARA.WILLIAMS@EXAMPLE.COM",
+                Email = "sara.williams@example.com",
+                NormalizedEmail = "SARA.WILLIAMS@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!")
+            };
+
+            var user3 = new IdentityUser
+            {
+                Id = "user3_id",
+                UserName = "ken.wong@example.com",
+                NormalizedUserName = "KEN.WONG@EXAMPLE.COM",
+                Email = "ken.wong@example.com",
+                NormalizedEmail = "KEN.WONG@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!")
+            };
+
+            modelBuilder.Entity<IdentityUser>().HasData(user1, user2, user3);
 
             modelBuilder.Entity<Dock>().HasData(
                 new Dock { ID = 1, Name = "Dock A", WaterService = true, ElectricalService = true },
@@ -126,9 +162,9 @@ namespace Marina.DataAccess.Data
             );
 
             modelBuilder.Entity<Lease>().HasData(
-                new Lease { ID = 1, SlipId = 20, CustomerId = 1 },
-                new Lease { ID = 2, SlipId = 42, CustomerId = 2 },
-                new Lease { ID = 3, SlipId = 88, CustomerId = 3 }
+                new Lease { ID = 1, SlipId = 20, CustomerID = "user1_id" },
+                new Lease { ID = 2, SlipId = 42, CustomerID = "user2_id" },
+                new Lease { ID = 3, SlipId = 88, CustomerID = "user3_id" }
             );
         }
     }

@@ -13,12 +13,12 @@ namespace Marina.Models
         [Key]
         public int ID { get; set; }
         public int SlipId { get; set; }
-        public int CustomerId { get; set; }
+        public string CustomerID { get; set; }
 
         [ForeignKey("SlipId")]
         public virtual Slip Slip { get; set; }
 
-        [ForeignKey("CustomerId")]
+
         public virtual Customer Customer { get; set; }
     }
 }
