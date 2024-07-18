@@ -42,6 +42,7 @@ namespace Marina.Controllers
             return PartialView("_DocksAndSlips", viewModel);
         }
 
+
         public async Task<IActionResult> Index(int? dockId, int pageIndex = 1, int pageSize = 5)
         {
             var docks = await _unitOfWork.Dock.GetDocksWithSlips();
