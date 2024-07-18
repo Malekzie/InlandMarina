@@ -18,7 +18,7 @@ namespace Marina.Areas.Customer.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> LoadDocksAndSlips(int dockId, int pageIndex = 1, int pageSize = 5)
+        public async Task<IActionResult> LoadDocksAndSlips(int dockId, int pageIndex = 1, int pageSize = 8)
         {
             var docks = await _unitOfWork.Dock.GetDocksWithSlips();
             if (!docks.Any())
@@ -46,7 +46,7 @@ namespace Marina.Areas.Customer.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int? dockId, int pageIndex = 1, int pageSize = 5)
+        public async Task<IActionResult> Index(int? dockId, int pageIndex = 1, int pageSize = 8)
         {
             var docks = await _unitOfWork.Dock.GetDocksWithSlips();
             if (!docks.Any())
