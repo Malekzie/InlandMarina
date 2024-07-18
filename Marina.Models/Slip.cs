@@ -22,5 +22,7 @@ namespace Marina.Models
 
         // Navigation Property
         public virtual ICollection<Lease> Leases { get; set; }
+
+        public bool IsAvailable => !Leases.Any();
     }
 }

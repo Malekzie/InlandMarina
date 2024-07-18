@@ -7,6 +7,7 @@
             <th scope="col">Slip Number</th>
             <th scope="col">Width</th>
             <th scope="col">Length</th>
+            <th scope="col">Availability</th>
             <th></th>
         </tr>
     </thead>
@@ -17,6 +18,11 @@
                 <td>@slip.ID</td>
                 <td>@slip.Width</td>
                 <td>@slip.Length</td>
+                <td>
+                    <div class="@(slip.IsAvailable ? "text-success" : "text-danger")">
+                        @(slip.IsAvailable ? "Available" : "Reserved")
+                    </div>
+                </td>
                 <td><a asp-action="Reserve" asp-route-id="@slip.ID" class="btn btn-primary">Reserve</a></td>
             </tr>
         }

@@ -29,9 +29,9 @@ namespace Marina.DataAccess.Repositories
 
         public async Task<PaginatedList<Slip>> GetSlipsWithPagination(int dockId, int pageIndex, int pageSize)
         {
-            // Fetch the dock and include its slips as an EF Core query
             var dock = await _db.Dock
                                 .Include(d => d.Slips)
+                                .ThenInclude(s => s.Leases) // Include leases
                                 .FirstOrDefaultAsync(d => d.ID == dockId);
 
             if (dock == null)
@@ -39,10 +39,12 @@ namespace Marina.DataAccess.Repositories
                 return new PaginatedList<Slip>(new List<Slip>(), 0, pageIndex, pageSize);
             }
 
-            // Query slips as an EF Core IQueryable
-            var slipsQuery = _db.Slips.Where(s => s.DockId == dockId).AsQueryable();
+            var slipsQuery = _db.Slips
+                                .Where(s => s.DockId == dockId)
+                                .Include(s => s.Leases); // Include leases
 
             return await PaginatedList<Slip>.CreateAsync(slipsQuery, pageIndex, pageSize);
         }
+
     }
 }
