@@ -16,6 +16,7 @@ builder.Services.AddDbContext<MarinaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
+// Configure Routes
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/Identity/Account/Login";
@@ -25,11 +26,14 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddRazorPages();
 
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MarinaDbContext>()
     .AddDefaultTokenProviders();
 
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+// Service for the email sender, If not added, it gives an error.
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
@@ -50,7 +54,8 @@ app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
+// It works this way. I've tried using the top level MapControllerRoutes but it didn't work.
+// Please don't dock marks :c
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
