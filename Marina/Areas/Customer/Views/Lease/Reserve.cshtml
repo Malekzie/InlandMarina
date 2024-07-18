@@ -1,0 +1,42 @@
+﻿@model Slip
+
+@{
+    ViewData["Title"] = "Reserve a Slip";
+}
+<div class="card shadow-lg border-0 mt-4">
+    <div class="card-header bg-gradient text-black text-center py-4" style="background: linear-gradient(45deg, #007bff, #6610f2);">
+        <h2 class="py-2">Reserve A Slip</h2>
+    </div>
+    <div class="card-body">
+        <h4 class="py-2 text-muted">Slip Details</h4>
+        <div class="row border rounded-3 p-3 mb-4" style="background: #f9f9f9;">
+            <div class="col-md-4">
+                <p><strong>Slip Slot:</strong> @Model.ID</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Width:</strong> @Model.Width ft</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Length:</strong> @Model.Length ft</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <form asp-action="Reserve" method="post">
+            <input type="hidden" name="slipId" value="@Model.ID" />
+            <button type="submit" class="btn btn-outline-primary">Reserve</button>
+        </form>
+    </div>
+</div>
+
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+{
+    <div class="validation-summary-errors">
+        <ul>
+            @foreach (var error in ViewData.ModelState[""].Errors)
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}

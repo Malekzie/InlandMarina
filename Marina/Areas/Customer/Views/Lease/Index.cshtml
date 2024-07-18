@@ -1,6 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<h1>Lease Page</h1>
+﻿@model List<Lease>
+
+<h2>My Slips</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Slip ID</th>
+            <th>Width</th>
+            <th>Length</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lease in Model)
+        {
+            <tr>
+                <td>@lease.Slip.ID</td>
+                <td>@lease.Slip.Width</td>
+                <td>@lease.Slip.Length</td>
+            </tr>
+        }
+    </tbody>
+</table>

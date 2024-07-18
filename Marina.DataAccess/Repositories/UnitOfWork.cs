@@ -1,6 +1,5 @@
 ﻿using Marina.DataAccess.Data;
 using Marina.DataAccess.Repositories.IRepository;
-using System.Threading.Tasks;
 
 namespace Marina.DataAccess.Repositories
 {

@@ -23,7 +23,7 @@
                         @(slip.IsAvailable ? "Available" : "Reserved")
                     </div>
                 </td>
-                <td><a asp-action="Reserve" asp-route-id="@slip.ID" class="btn btn-primary">Reserve</a></td>
+                <td><a asp-action="Reserve" asp-area="Customer" asp-controller="Lease" asp-route-slipID="@slip.ID" class="btn btn-primary">Reserve</a></td>
             </tr>
         }
     </tbody>

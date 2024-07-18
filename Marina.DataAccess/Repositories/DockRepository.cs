@@ -3,8 +3,6 @@ using Marina.DataAccess.Repositories.IRepository;
 using Marina.Models;
 using Marina.Utils;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Marina.DataAccess.Repositories
 {

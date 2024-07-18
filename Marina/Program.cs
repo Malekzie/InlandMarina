@@ -1,11 +1,10 @@
 using Marina.DataAccess.Data;
 using Marina.DataAccess.Repositories;
 using Marina.DataAccess.Repositories.IRepository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Marina.Utils;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

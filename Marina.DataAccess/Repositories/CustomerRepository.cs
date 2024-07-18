@@ -1,11 +1,6 @@
 ﻿using Marina.DataAccess.Data;
 using Marina.DataAccess.Repositories.IRepository;
 using Marina.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Marina.DataAccess.Repositories
 {
@@ -13,7 +8,7 @@ namespace Marina.DataAccess.Repositories
     {
         private readonly MarinaDbContext _db;
 
-        public CustomerRepository(MarinaDbContext db): base(db)
+        public CustomerRepository(MarinaDbContext db) : base(db)
         {
             _db = db;
         }

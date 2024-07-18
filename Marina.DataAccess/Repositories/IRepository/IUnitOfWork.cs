@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Marina.DataAccess.Repositories.IRepository
+﻿namespace Marina.DataAccess.Repositories.IRepository
 {
     public interface IUnitOfWork : IDisposable
     {
