@@ -2,7 +2,7 @@
 @model RegisterModel
 
 <div class="card shadow border-0 mt-4">
-    <div class="card-header bg-black bg-gradient ml-0 py-4">
+    <div class="card-header bg-dark bg-gradient ml-0 py-4">
         <div class="row">
             <div class="col-12 text-center">
                 <h2 class="py-2 text-white-50">Register</h2>
@@ -56,12 +56,15 @@
                     </div>
 
                     <div class="col-12">
-                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-dark">Register</button>
                     </div>
                 </form>
             </div>
-            <div class="col-md-12 col-md-offset-2">
-                <section>
+@* ******************************************************************************************************  *@
+               @*  Redundant as no implementation will be given *@
+
+            @* <div class="col-md-12 col-md-offset-2">
+                 <section>
                     <p class="divider-text d-flex pt-3">or</p>
                     <h3>Use another service to register.</h3>
                     @{
@@ -90,7 +93,7 @@
                             </form>
                         }
                     }
-                </section>
+                </section> *@
             </div>
         </div>
     </div>
