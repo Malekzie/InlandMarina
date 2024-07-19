@@ -122,9 +122,20 @@ namespace Marina.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                
-
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                
+                // Sets the phone to the user's phone number
+                // Kinda redundant but it's here for clarity
+                var phone = user.PhoneNumber = Input.Phone;
+                user.Phone = phone;
+
+                user.City = Input.City;
+
+
 
                 if (result.Succeeded)
                 {
@@ -164,11 +175,11 @@ namespace Marina.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private Models.Customer CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<Models.Customer>();
             }
             catch
             {
