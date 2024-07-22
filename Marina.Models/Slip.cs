@@ -22,5 +22,8 @@ namespace Marina.Models
 
         // Navigation Property
         public virtual ICollection<Lease> Leases { get; set; }
+
+        // Computed property to determine availability
+        public bool IsAvailable => !Leases.Any(); // If there are no leases, the slip is available
     }
 }
