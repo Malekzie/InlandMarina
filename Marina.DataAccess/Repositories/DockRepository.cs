@@ -44,5 +44,13 @@ namespace Marina.DataAccess.Repositories
             return await PaginatedList<Slip>.CreateAsync(slipsQuery, pageIndex, pageSize);
         }
 
+        public async Task<PaginatedList<Slip>> GetAllSlipsWithPagination(int pageIndex, int pageSize)
+        {
+            var slipsQuery = _db.Slips
+                                .Include(s => s.Leases); // Include leases
+
+            return await PaginatedList<Slip>.CreateAsync(slipsQuery, pageIndex, pageSize);
+        }
+
     }
 }

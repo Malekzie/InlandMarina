@@ -5,9 +5,10 @@
 <form method="get" class="mb-3">
     <div class="input-group">
         <select class="form-select" name="dockId" id="dockId" onchange="loadDocksAndSlips()">
+            <option value="" selected=@(Model.SelectedDock == null ? "selected" : "")>All docks</option>
             @foreach (var dock in Model.Docks)
             {
-                <option value="@dock.ID" selected=@(dock.ID == Model.SelectedDock.ID ? "selected" : null)>@dock.Name</option>
+                <option value="@dock.ID" selected=@(Model.SelectedDock?.ID == dock.ID ? "selected" : "")>@dock.Name</option>
             }
         </select>
     </div>
@@ -27,6 +28,9 @@
             data: { dockId: dockId },
             success: function (result) {
                 $('#docksAndSlipsContainer').html(result);
+                if (dockId) {
+                    $('#docksAndSlipsContainer').find('.table').removeClass('visually-hidden');
+                }
             }
         });
     }
@@ -39,6 +43,9 @@
             data: { dockId: dockId, pageIndex: pageIndex },
             success: function (result) {
                 $('#docksAndSlipsContainer').html(result);
+                if (dockId) {
+                    $('#docksAndSlipsContainer').find('.table').removeClass('visually-hidden');
+                }
             }
         });
     }

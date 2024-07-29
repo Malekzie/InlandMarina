@@ -1,5 +1,6 @@
 ﻿using Marina.DataAccess.Repositories.IRepository;
 using Marina.Models;
+using Marina.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Marina.Areas.Customer.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> LoadDocksAndSlips(int dockId, int pageIndex = 1, int pageSize = 8)
+        public async Task<IActionResult> LoadDocksAndSlips(int? dockId, int pageIndex = 1, int pageSize = 8)
         {
             var docks = await _unitOfWork.Dock.GetDocksWithSlips();
             if (!docks.Any())
@@ -24,14 +25,23 @@ namespace Marina.Areas.Customer.Controllers
                 return NotFound("No docks found.");
             }
 
-            var dock = docks.FirstOrDefault(d => d.ID == dockId);
+            Dock dock = null;
+            PaginatedList<Slip> paginatedSlips;
 
-            if (dock == null)
+            if (dockId.HasValue && dockId > 0)
             {
-                return NotFound($"Dock with ID {dockId} not found.");
-            }
+                dock = docks.FirstOrDefault(d => d.ID == dockId.Value);
+                if (dock == null)
+                {
 
-            var paginatedSlips = await _unitOfWork.Dock.GetSlipsWithPagination(dockId, pageIndex, pageSize);
+                   return NotFound($"Dock with ID {dockId} not found.");
+                }
+                paginatedSlips = await _unitOfWork.Dock.GetSlipsWithPagination(dockId.Value, pageIndex, pageSize);
+            }
+            else
+            {
+                paginatedSlips = await _unitOfWork.Dock.GetAllSlipsWithPagination(pageIndex, pageSize);
+            }
 
             var viewModel = new DockViewModel
             {

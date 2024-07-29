@@ -1,7 +1,7 @@
 ﻿@model Marina.Models.DockViewModel
 
-<table class="table caption-top">
-    <caption>@Model.SelectedDock.Name</caption>
+<table class="table caption-top @(Model.SelectedDock == null ? "" : "visually-hidden")">
+    <caption>@(Model.SelectedDock?.Name ?? "All Docks")</caption>
     <thead>
         <tr>
             <th scope="col">Slip Number</th>
@@ -26,9 +26,9 @@
                 <td>
                     @if (slip.IsAvailable)
                     {
-                        <a asp-action="Reserve"
-                           asp-area="Customer"
+                        <a asp-area="Customer"
                            asp-controller="Lease"
+                           asp-action="Reserve"
                            asp-route-slipID="@slip.ID"
                            class="btn btn-primary">
                             Reserve

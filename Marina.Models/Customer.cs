@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Marina.Models
 {
-    public class Customer:IdentityUser
+    public class Customer: IdentityUser
     {
 
         [Required]
